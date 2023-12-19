@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install Terraform
-        run: |
-          wget https://releases.hashicorp.com/terraform/$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')/terraform_$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r -M '.current_version')_linux_amd64.zip
-          unzip terraform_*.zip
-          sudo mv terraform /usr/local/bin/
-          rm terraform_*.zip
-        shell: bash
+      - name: "Install Terraform"
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.6.6"
+      - name: "terraform version"
+        run:  terraform version
+
       - name: "running date command"
         run: date
         shell: bash
