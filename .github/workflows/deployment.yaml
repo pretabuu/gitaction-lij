@@ -1,0 +1,44 @@
+---
+name: "simple github action"
+
+on:
+  push:
+    branches:
+      - master
+      - testing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "running date command"
+        run: date
+        shell: bash
+
+      - name: "getting os details"
+        run: cat /etc/os-release
+        shell: bash
+
+      - name: "user details"
+        run: whoami
+        shell: bash
+
+      - name: "current working before directory"
+        run: |
+          pwd
+          ls -al
+
+      - name: "checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "current working after directory"
+        run: |
+          pwd
+          ls -al
+
+      - name: "running script"
+        run: |
+          chmod +x script.sh
+          ./script.sh
+
